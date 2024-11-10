@@ -1,5 +1,9 @@
 clear;
-% Parameters
+
+% -------------------------------- %
+%         Model Parameters         %
+% -------------------------------- %
+
 l1_normal = 0.028;
 l1_diabetes = 0.0;
 l2 = 0.025;
@@ -8,6 +12,10 @@ Vl = 12;
 n = 5/54;
 Gb = 4.5;
 Ib = 15;
+
+% -------------------------------- %
+%         Model Equations          %
+% -------------------------------- %
 
 u = @(t) n * Vl * Ib; % Basal input
 
@@ -23,8 +31,11 @@ odeSystemDiabetes = @(t, z) [
     -n*z(3) - n*Ib + (u(t)/Vl)                % z3_dot
     ];
 
-tspan = [0 300];
+% -------------------------------- %
+%          Time Response           %
+% -------------------------------- %
 
+tspan = [0 300];
 z0 = [10; 0.01; 0];
 
 % Solve for normal case
@@ -63,6 +74,10 @@ grid on;
 
 % Save the first figure
 exportgraphics(gcf, 'images/time_response.pdf', 'ContentType', 'vector', 'BackgroundColor', 'none');
+
+% -------------------------------- %
+%          Phase Portrait          %
+% -------------------------------- %
 
 % Quiver plot for phase portrait
 figure('Position', [100, 100, 700, 250]); % Set window size
